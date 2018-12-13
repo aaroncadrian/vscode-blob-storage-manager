@@ -1,6 +1,6 @@
 {
-    "name": "push-to-blob-storage",
-    "displayName": "pushToBlobStorage",
+    "name": "blob-storage-manager",
+    "displayName": "blobStorageManager",
     "description": "This extension pushes the active file to Azure blob storage.",
     "version": "0.0.1",
     "publisher": "aaronadrian",
@@ -11,16 +11,37 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:extension.sayHello"
+        "onCommand:blobStorageManager.pushFileToBlobStorage"
     ],
     "main": "./out/extension",
     "contributes": {
         "commands": [
             {
-                "command": "extension.sayHello",
-                "title": "Hello World"
+                "command": "blobStorageManager.pushFileToBlobStorage",
+                "title": "Push File to Blob Storage",
+                "category": "Blob Storage"
             }
-        ]
+        ],
+        "configuration": {
+            "title": "Blob Storage Manager Configuration",
+            "properties": {
+                "blobStorageManager.connectionString": {
+                    "type": "string",
+                    "default": "",
+                    "description": "Connection string to blob storage account"
+                },
+                "blobStorageManager.container": {
+                    "type": "string",
+                    "default": "",
+                    "description": "Destination container name"
+                },
+                "blobStorageManager.folderPath": {
+                    "type": "string",
+                    "default": "",
+                    "description": "Destination folder path"
+                }
+            }
+        }
     },
     "scripts": {
         "vscode:prepublish": "npm run compile",
@@ -30,10 +51,13 @@
         "test": "npm run compile && node ./node_modules/vscode/bin/test"
     },
     "devDependencies": {
-        "typescript": "^2.6.1",
-        "vscode": "^1.1.21",
-        "tslint": "^5.8.0",
+        "@types/mocha": "^2.2.42",
         "@types/node": "^8.10.25",
-        "@types/mocha": "^2.2.42"
+        "tslint": "^5.8.0",
+        "typescript": "^2.6.1",
+        "vscode": "^1.1.21"
+    },
+    "dependencies": {
+        "azure-storage": "^2.10.2"
     }
 }
