@@ -25,8 +25,7 @@ export default function pushToBlobStorage(channel: OutputChannel) {
         const connectionString = getConnectionString();
         const container = getContainer();
 
-        if(!connectionString || !container)
-        {
+        if(!connectionString || !container) {
             return;
         }
     
